@@ -20,8 +20,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", globalRoute);
-app.use("/api", paymentRoutes);
 app.use("/api", authRoutes);
+app.use("/api", paymentRoutes);
 
 app.listen(port, () => {
   console.log("Express listening to port 3000");
