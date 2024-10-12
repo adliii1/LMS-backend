@@ -17,14 +17,16 @@ const courseModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  decription: {
+  description: {
     type: String,
     required: true,
   },
-  students: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  students: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
