@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js";
 
 import { mutateCourseSchema } from "../utils/schema.js";
 import fs from "fs";
+import path from "path";
 
 export const getCourse = async (req, res) => {
   try {
@@ -150,6 +151,37 @@ export const updateCourse = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Internal Server Error",
+    });
+  }
+};
+
+export const deleteCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const course = await courseModel.findByIdA(id);
+
+    const dirname = path.resolve();
+
+    const filePath = path.json(
+      dirname,
+      "public/uploads/courses",
+      course.thumbnail
+    );
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    await courseModel.findByIdAndDelete(id);
+
+    return res.json({
+      message: "Delete course success",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
     });
   }
 };

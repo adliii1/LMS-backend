@@ -1,10 +1,12 @@
 import express from "express";
 import {
+  deleteCourse,
   getCourse,
   postCourse,
   updateCourse,
 } from "../controllers/courseController.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
+
 import multer from "multer";
 import { fileFilter, fileStorageCourse } from "../utils/multer.js";
 
@@ -27,5 +29,6 @@ courseRoute.put(
   upload.single("thumbnail"),
   updateCourse
 );
+courseRoute.delete("/courses/:id", verifyToken, deleteCourse);
 
 export default courseRoute;
