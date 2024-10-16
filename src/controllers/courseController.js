@@ -16,7 +16,7 @@ export const getCourse = async (req, res) => {
       .populate({ path: "category", select: "name -_id" })
       .populate({ path: "students", select: "name" });
 
-    const imageURL = process.env.APP_URL + "/uploads/courses";
+    const imageURL = process.env.APP_URL + "/uploads/courses/";
 
     const response = course.map((item) => {
       return {
@@ -53,6 +53,7 @@ export const getCategories = async (req, res) => {
 
 export const postCourse = async (req, res) => {
   try {
+    console.log(req.file)
     const body = req.body;
 
     const parse = mutateCourseSchema.safeParse(body);

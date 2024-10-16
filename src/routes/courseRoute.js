@@ -13,7 +13,7 @@ import { fileFilter, fileStorageCourse } from "../utils/multer.js";
 
 const courseRoute = express.Router();
 const upload = multer({
-  Storage: fileStorageCourse,
+  storage: fileStorageCourse,
   fileFilter,
 });
 
