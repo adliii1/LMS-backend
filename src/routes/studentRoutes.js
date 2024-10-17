@@ -1,7 +1,12 @@
 import express from "express";
-import { verifyToken } from "../middlewares/verifyToken.js";
-import { getStudents, postStudent } from "../controllers/studentController.js";
 import multer from "multer";
+
+import { verifyToken } from "../middlewares/verifyToken.js";
+import {
+  getStudents,
+  postStudent,
+  updateStudent,
+} from "../controllers/studentController.js";
 import { fileStorage, fileFilter } from "../utils/multer.js";
 
 const studentRoutes = express.Router();
@@ -17,6 +22,12 @@ studentRoutes.post(
   verifyToken,
   upload.single("photo"),
   postStudent
+);
+studentRoutes.put(
+  "/students/:id",
+  verifyToken,
+  upload.single("photo"),
+  updateStudent
 );
 
 export default studentRoutes;
