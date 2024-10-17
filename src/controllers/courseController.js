@@ -192,11 +192,11 @@ export const deleteCourse = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const course = await courseModel.findByIdA(id);
+    const course = await courseModel.findById(id);
 
     const dirname = path.resolve();
 
-    const filePath = path.json(
+    const filePath = path.join(
       dirname,
       "public/uploads/courses",
       course.thumbnail
