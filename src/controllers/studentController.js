@@ -5,14 +5,25 @@ import { mutateStudentSchema } from "../utils/schema.js";
 
 export const getStudents = async (req, res) => {
   try {
-    const students = await userModel.find({
-      role: "student",
-      manager: req.user._id,
+    const students = await userModel
+      .find({
+        role: "student",
+        manager: req.user._id,
+      })
+      .select("name courses photo");
+
+    const imageURL = process.env.APP_URL + "/uploads/student/";
+
+    const response = students.map((item) => {
+      return {
+        ...item.toObject(),
+        photo_url: imageURL + item.photo,
+      };
     });
 
     return res.json({
       message: "Get students success",
-      data: students,
+      data: response,
     });
   } catch (error) {
     console.log(error);
