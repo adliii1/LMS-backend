@@ -51,9 +51,25 @@ export const getCategories = async (req, res) => {
   }
 };
 
+export const getCourseById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const course = await courseModel.findById(id);
+
+    return res.json({
+      message: "Get course by Id success",
+      data: course,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
 export const postCourse = async (req, res) => {
   try {
-    console.log(req.file)
     const body = req.body;
 
     const parse = mutateCourseSchema.safeParse(body);

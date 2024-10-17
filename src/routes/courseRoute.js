@@ -3,6 +3,7 @@ import {
   deleteCourse,
   getCategories,
   getCourse,
+  getCourseById,
   postCourse,
   updateCourse,
 } from "../controllers/courseController.js";
@@ -19,6 +20,7 @@ const upload = multer({
 
 courseRoute.get("/courses", verifyToken, getCourse);
 courseRoute.get("/categories", verifyToken, getCategories);
+courseRoute.get("/courses/:id", verifyToken, getCourseById);
 courseRoute.post(
   "/courses",
   verifyToken,
