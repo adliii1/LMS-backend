@@ -6,7 +6,6 @@ export const fileStorageCourse = multer.diskStorage({
   },
   filename: (req, file, callback) => {
     const extension = file.originalname.split(".")[1];
-    console.log(file);
     const uniqeId = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     callback(null, `${file.fieldname}-${uniqeId}.${extension}`);
   },
