@@ -28,7 +28,7 @@ courseRoute.post(
   postCourse
 );
 courseRoute.put(
-  "courses/:id",
+  "/courses/:id",
   verifyToken,
   upload.single("thumbnail"),
   updateCourse
