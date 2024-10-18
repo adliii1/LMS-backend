@@ -54,7 +54,7 @@ export const getCategories = async (req, res) => {
 export const getCourseById = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await courseModel.findById(id);
+    const course = await courseModel.findById(id).populate("detail");
 
     return res.json({
       message: "Get course by Id success",
