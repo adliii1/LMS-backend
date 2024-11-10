@@ -260,6 +260,7 @@ export const updateContentCourse = async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
+    const course = await courseModel.findByIdAndUpdate(body.courseId);
 
     await courseDetailModel.findByIdAndUpdate(
       id,
@@ -268,12 +269,30 @@ export const updateContentCourse = async (req, res) => {
         type: body.type,
         youtubeId: body.videoId,
         text: body.text,
+        course: course._id,
       },
       { new: true }
     );
 
     return res.json({
       message: "Update course content success",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+export const deleteContentCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await courseDetailModel.findByIdAndDelete(id);
+
+    return res.json({
+      message: "Delete course content success",
     });
   } catch (error) {
     console.log(error);
