@@ -6,6 +6,7 @@ import {
   getCourseById,
   postContentCourse,
   postCourse,
+  updateContentCourse,
   updateCourse,
 } from "../controllers/courseController.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
@@ -43,6 +44,11 @@ courseRoute.post(
   verifyToken,
   validateRequest(mutateContentSchema),
   postContentCourse
+);
+courseRoute.put(
+  "/courses/contents/:id",
+  verifyToken,
+  updateContentCourse
 );
 
 export default courseRoute;

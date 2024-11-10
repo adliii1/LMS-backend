@@ -255,3 +255,30 @@ export const postContentCourse = async (req, res) => {
     });
   }
 };
+
+export const updateContentCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+
+    await courseDetailModel.findByIdAndUpdate(
+      id,
+      {
+        title: body.title,
+        type: body.type,
+        youtubeId: body.videoId,
+        text: body.text,
+      },
+      { new: true }
+    );
+
+    return res.json({
+      message: "Update course content success",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
