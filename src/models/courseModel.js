@@ -34,10 +34,12 @@ const courseModel = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  detail: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CourseDetail",
-  },
+  details: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CourseDetail",
+    },
+  ],
 });
 
 courseModel.post("findOneAndDelete", async (doc) => {

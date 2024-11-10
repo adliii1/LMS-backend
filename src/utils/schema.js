@@ -24,3 +24,11 @@ export const mutateStudentSchema = z.object({
   email: z.string().email(),
   password: z.string().min(5),
 });
+
+export const mutateContentSchema = z.object({
+  title: z.string().min(5),
+  type: z.string(),
+  youtubeId: z.string().optional(),
+  text: z.string().optional(),
+  courseId: z.string().min(5),
+});
