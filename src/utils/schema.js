@@ -32,3 +32,7 @@ export const mutateContentSchema = z.object({
   text: z.string().optional(),
   courseId: z.string().min(5),
 });
+
+export const addStudentCourseSchema = z.object({
+  studentId: z.string().min(5),
+});
