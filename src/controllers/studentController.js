@@ -62,6 +62,7 @@ export const postStudent = async (req, res) => {
       email: parse?.data?.email,
       photo: req?.file?.filename,
       manager: req?.user?._id,
+      role: "student",
     });
 
     await student.save();
