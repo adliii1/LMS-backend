@@ -5,6 +5,7 @@ import { verifyToken } from "../middlewares/verifyToken.js";
 import {
   deleteStudent,
   getStudents,
+  getStudentById,
   postStudent,
   updateStudent,
 } from "../controllers/studentController.js";
@@ -18,6 +19,7 @@ const upload = multer({
 });
 
 studentRoutes.get("/students", verifyToken, getStudents);
+studentRoutes.get("/students/:id", verifyToken, getStudentById);
 studentRoutes.post(
   "/students",
   verifyToken,

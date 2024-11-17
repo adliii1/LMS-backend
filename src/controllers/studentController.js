@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import userModel from "../models/userModel.js";
 import { mutateStudentSchema } from "../utils/schema.js";
 import courseModel from "../models/courseModel.js";
+import path from "path";
+import fs from "fs";
 
 export const getStudents = async (req, res) => {
   try {
@@ -30,6 +32,24 @@ export const getStudents = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Internal server erorr",
+    });
+  }
+};
+
+export const getStudentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const student = await userModel.findById(id).select("name email");
+
+    return res.json({
+      message: "Get student by id success",
+      data: student,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
     });
   }
 };
@@ -133,7 +153,7 @@ export const deleteStudent = async (req, res) => {
 
     await courseModel.findOneAndUpdate(
       {
-        students: student.id,
+        students: id,
       },
       {
         $pull: {
